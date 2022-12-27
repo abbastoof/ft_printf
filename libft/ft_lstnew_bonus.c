@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 23:02:03 by atoof             #+#    #+#             */
-/*   Updated: 2022/12/08 23:02:25 by atoof            ###   ########.fr       */
+/*   Created: 2022/11/14 10:54:46 by mtoof             #+#    #+#             */
+/*   Updated: 2022/11/16 16:01:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+t_list	*ft_lstnew(void *content)
 {
-	char	*str;
+	t_list	*lstnew;
 
-	str = (char *)s;
-	while (*str != c)
-	{
-		if (*str == '\0')
-		{
-			return (NULL);
-		}
-		str++;
-	}
-	return (str);
+	lstnew = malloc(sizeof(t_list));
+	if (!lstnew)
+		return (NULL);
+	lstnew->content = content;
+	lstnew->next = NULL;
+	return (lstnew);
 }

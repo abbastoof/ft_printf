@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 14:48:15 by mtoof             #+#    #+#             */
-/*   Updated: 2022/12/23 03:24:52 by atoof            ###   ########.fr       */
+/*   Created: 2022/12/06 14:47:17 by mtoof             #+#    #+#             */
+/*   Updated: 2022/12/23 03:24:43 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-int		ft_putstr(char *s);
-int		ft_putchar(char c);
-int		ft_putnbr(unsigned int nb, int base, int sign);
-int		ft_printf(const char *tmp, ...);
-int		ft_convert_number(unsigned long num, int base, char sign);
-
-#endif
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}

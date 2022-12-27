@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 14:48:15 by mtoof             #+#    #+#             */
-/*   Updated: 2022/12/23 03:24:52 by atoof            ###   ########.fr       */
+/*   Created: 2022/12/06 14:53:55 by mtoof             #+#    #+#             */
+/*   Updated: 2022/12/22 19:49:42 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_putstr(char *str)
+{
+	int	length;
+	int	i;
 
-int		ft_putstr(char *s);
-int		ft_putchar(char c);
-int		ft_putnbr(unsigned int nb, int base, int sign);
-int		ft_printf(const char *tmp, ...);
-int		ft_convert_number(unsigned long num, int base, char sign);
-
-#endif
+	length = 0;
+	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	if (str)
+	{
+		while (str[i] != '\0')
+		{
+			length += ft_putchar(str[i]);
+			i++;
+		}
+	}
+	return (length);
+}

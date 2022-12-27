@@ -5,103 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 13:26:18 by atoof             #+#    #+#             */
-/*   Updated: 2022/12/16 20:53:39 by atoof            ###   ########.fr       */
+/*   Created: 2022/12/06 14:42:22 by mtoof             #+#    #+#             */
+/*   Updated: 2022/12/22 19:47:10 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-int	ft_search_format(t_print *args, const char *format)
+static int	ft_check_int(va_list args, int counter)
 {
-	int returnn;
-	int	index;
+	long	i;
 
-	index = 0;
-	returnn = 0;
-	while (!"udcsupxX%")
+	i = va_arg(args, int);
+	if (i < 0)
 	{
-		if(format[index] == '.')
-			args->point = 1;
-			index++;
-		if(format[index] == '-')
-			args->dash = 1;
-			index++;
-		if(format[index] == ' ')
-			args->space = 1;
-			index++;
-		if(format[index] < 0)
-			args->sign = 1;
-		if(format[index] > 0)
-			args->sign = 1;
+		counter += ft_putchar('-');
+		i = -i;
 	}
+	counter += ft_convert(i, 10, 0);
+	return (counter);
 }
 
-int	ft_check_format(t_print args, const char format)
+static int	ft_check_format(va_list args, const char *format)
 {
-	int	print_length;
+	int	length;
 
-	print_length = 0;
-	if (format == 'c')
-		print_length += printchar(va_arg(args.arg, int));
-	else if (format == 's')
-		print_length += printstr(va_arg(args.arg, char *));
-	else if (format == 'p')
-		print_length += print_ptr(va_arg(args.arg, unsigned long long));
-	else if (format == 'd' || format == 'i')
-		print_length += printnbr(va_arg(args.arg, int));
-	else if (format == 'u')
-		print_length += print_unsigned(va_arg(args.arg, unsigned int));
-	else if (format == 'x' || format == 'X')
-		print_length += print_hex(va_arg(args.arg, unsigned int), format);
-	else if (format == '%')
-		print_length += printpercent();
-	return (print_length);
-}
-
-t_print	*ft_initialise(t_print *init)
-{
-	//set everything to false
-	init->length = 0;
-	init->dash = 0;
-	init->width = 0;
-	init->is_zero = 0;
-	init->percentage = 0;
-	init->point = 0;
-	init->precision = 0;
-	init->sign = 0;
-	init->space = 0;
-	init->zeropadding = 0;
-	return (init);
-}
-
-int	ft_printf(const char *format, ...)
-{
-	t_print	argument;
-	int		i;
-	int		printf_length;
-
-	argument.arg = (t_print *)malloc(sizeof(t_print));
-	if (!argument.arg)
-		return (-1);
-	ft_initialise(argument.arg);
-	va_start(argument.arg, format);
-	i = 0;
-	printf_length = 0;
-	while (format[i]) // string exists
+	length = 0;
+	if (*format == 'c')
+		length += ft_putchar(va_arg(args, int));
+	else if (*format == 's')
+		length += ft_putstr(va_arg(args, char *));
+	else if (*format == 'X')
+		length += ft_convert_number(va_arg(args, unsigned int), 16, 0);
+	else if (*format == 'x')
+		length += ft_convert_number(va_arg(args, unsigned int), 16, 32);
+	else if (*format == 'd' || *format == 'i')
+		length += ft_check_int(args, length);
+	else if (*format == 'u')
+		length += ft_convert_number(va_arg(args, unsigned int), 10, 0);
+	else if (*format == 'p')
 	{
-		if (format[i] == '%') //if the char is %
+		length += ft_putstr("0x");
+		length += ft_convert_number((size_t)va_arg(args, void *), 16, 32);
+	}
+	else if (*format == '%')
+		length += ft_putchar('%');
+	return (length);
+}
+
+int	ft_printf(const char *tmp, ...)
+{
+	int		length;
+	va_list	args;
+
+	length = 0;
+	va_start(args, tmp);
+	while (*tmp)
+	{
+		if (*tmp != '%')
+			length += ft_putchar(*tmp);
+		else if (*tmp == '%')
 		{
-			printf_length += ft_check_format(argument, format[i + 1]);
-			i++;
+			tmp++;
+			length += ft_check_format(args, tmp);
 		}
-		else
-			printf_length += write(1, &format[i], 1);
-		i++;
+		if (!*tmp)
+			return (length);
+		tmp++;
 	}
-	va_end(argument.arg);
-	printf_length += (argument.length);
-	free (argument);
-	return (printf_length);
+	va_end(args);
+	return (length);
 }
