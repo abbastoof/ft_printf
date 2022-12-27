@@ -3,54 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 10:59:27 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:02 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/11 18:50:57 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/14 16:36:12 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	nlen(int n)
+static int	num_len(int n)
 {
-	int	i;
+	int	count;
 
-	i = 0;
+	count = 0;
 	if (n == 0)
-		return (1);
+		count = 1;
 	if (n < 0)
-		i++;
+		count++;
 	while (n)
 	{
-		n = (n / 10);
-		i++;
+		n = n / 10;
+		count++;
 	}
-	return (i);
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*num_str;
-	int		n_len;
-	long	number;
+	long	num;
+	char	*s;
+	int		numlen;
 
-	number = n;
-	n_len = nlen(n);
-	num_str = (char *)malloc(sizeof(char) * n_len + 1);
-	if (!num_str)
+	num = (long)n;
+	numlen = num_len(n);
+	s = (char *)malloc(sizeof(char) * (numlen + 1));
+	if (!s)
 		return (NULL);
-	num_str[n_len--] = '\0';
-	if (number < 0)
+	s[numlen--] = '\0';
+	if (num < 0)
 	{
-		num_str[0] = '-';
-		number = -number;
+		num = -num;
+		s[0] = '-';
 	}
-	while (number >= 10)
+	while (num >= 10)
 	{
-		num_str[n_len--] = (number % 10) + '0';
-		number = number / 10;
+		s[numlen--] = num % 10 + '0';
+		num = num / 10;
 	}
-	num_str[n_len] = number + '0';
-	return (num_str);
+	s[numlen] = num + '0';
+	return (s);
 }

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:10:17 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:14:26 by mtoof            ###   ########.fr       */
+/*   Created: 2022/10/28 15:39:43 by atoof             #+#    #+#             */
+/*   Updated: 2022/10/31 16:15:20 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *to, const void *from, unsigned int size)
 {
-	char	*dst_ptr;
-	char	*src_ptr;
-	int		i;
+	unsigned int	i;
+	char			*from_cpy;
+	char			*to_cpy;
 
-	if (!dst && !src)
-		return (NULL);
+	from_cpy = (char *)from;
+	to_cpy = (char *)to;
 	i = 0;
-	dst_ptr = (char *)dst;
-	src_ptr = (char *)src;
-	while (i < (int)n)
+	if (!to && !from)
+		return ((void *)0);
+	while (i < size)
 	{
-		dst_ptr[i] = src_ptr[i];
+		to_cpy[i] = from_cpy[i];
 		i++;
 	}
-	return (dst);
+	return (to_cpy);
 }

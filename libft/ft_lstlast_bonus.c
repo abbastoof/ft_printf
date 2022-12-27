@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 14:57:32 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:36 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/23 11:40:36 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/23 12:08:45 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*last;
+	t_list	*currentelement;
 
-	last = lst;
-	if (!last)
+	currentelement = lst;
+	if (currentelement == NULL)
 		return (NULL);
-	while (last->next != NULL)
-		last = last->next;
-	return (last);
+	while (currentelement ->next != NULL)
+		currentelement = currentelement->next;
+	return (currentelement);
 }

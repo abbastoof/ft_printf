@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 10:54:46 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:43 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/22 18:18:14 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 18:22:01 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*lstnew;
+	t_list	*new_lst;
 
-	lstnew = malloc(sizeof(t_list));
-	if (!lstnew)
+	new_lst = malloc(sizeof(t_list));
+	if (!new_lst)
 		return (NULL);
-	lstnew->content = content;
-	lstnew->next = NULL;
-	return (lstnew);
+	new_lst->content = content;
+	new_lst->next = NULL;
+	return (new_lst);
 }

@@ -3,36 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 16:02:54 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/17 15:00:30 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/17 14:13:24 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 16:10:50 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_words_count(char const *str, char c)
+static int	count_str(char const *str, char c)
 {
 	int	i;
-	int	words_count;
+	int	word;
 
-	words_count = 0;
 	i = 0;
+	word = 0;
 	while (str[i])
 	{
 		if (str[i] != c && (str[i + 1] == c || str[i + 1] == '\0'))
-			words_count++;
+			word++;
 		i++;
 	}
-	return (words_count);
-}
-
-static void	ft_freemem(char **str, int index)
-{
-	while (index--)
-		free(str[index]);
-	free(str);
+	return (word);
 }
 
 static int	ft_words_len(const char *s, char c, int index)
@@ -48,43 +41,52 @@ static int	ft_words_len(const char *s, char c, int index)
 	return (len);
 }
 
-static char	**ft_words(char **new_str, const char *s, char c, int words_count)
+static void	free_memory(char **str, int index)
 {
-	int	count;
-	int	index;
-	int	word_size;
+	while (index--)
+		free(str[index]);
+	free(str);
+}
 
-	count = 0;
+static char	**make_words(char **str, char const *s, char c, int w_count)
+{
+	int	index;
+	int	counter;
+	int	w_length;
+
+	counter = 0;
 	index = 0;
-	while (count < words_count)
+	while (counter < w_count)
 	{
-		while (s[index] == c)
+		while (s[index] == c && s[index])
 			index++;
-		word_size = ft_words_len(s, c, index);
-		new_str[count] = ft_substr(s, index, word_size);
-		if (!new_str[count])
+		w_length = ft_words_len(s, c, index);
+		str[counter] = ft_substr(s, index, w_length);
+		if (!str[counter])
 		{
-			ft_freemem(new_str, count);
+			free_memory(str, counter);
 			return (NULL);
 		}
-		index = index + word_size;
-		count++;
+		counter++;
+		index += w_length;
 	}
-	return (new_str);
+	return (str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**new_str;
-	int		words_count;
+	int		count;
+	char	**str;
+	int		index;
 
 	if (!s)
 		return (NULL);
-	words_count = ft_words_count(s, c);
-	new_str = (char **)malloc(sizeof(char *) * (words_count + 1));
-	if (!new_str)
+	index = 0;
+	count = count_str(s, c);
+	str = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!str)
 		return (NULL);
-	new_str = ft_words(new_str, s, c, words_count);
-	new_str[words_count] = 0;
-	return (new_str);
+	str = make_words(str, s, c, count);
+	str[count] = 0;
+	return (str);
 }

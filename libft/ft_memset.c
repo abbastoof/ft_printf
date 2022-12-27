@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 12:08:44 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:14:47 by mtoof            ###   ########.fr       */
+/*   Created: 2022/10/25 13:41:06 by atoof             #+#    #+#             */
+/*   Updated: 2022/10/25 15:44:53 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*ptr;
 
-	ptr = b;
-	while (len--)
-	{
+	ptr = s;
+	while (n--)
 		*ptr++ = c;
-	}
-	return (b);
+	return (s);
 }

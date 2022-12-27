@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 14:37:08 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:08:42 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/09 21:49:20 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/09 22:03:02 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	if (fd != -1 && s)
+	if (s)
 	{
-		while (s[i] != '\0')
+		while (*s)
 		{
-			ft_putchar_fd(s[i], fd);
-			i++;
+			ft_putchar_fd(*s, fd);
+			s++;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 08:54:34 by mtoof             #+#    #+#              #
-#    Updated: 2022/12/21 22:45:42 by atoof            ###   ########.fr        #
+#    Updated: 2022/12/27 14:55:29 by atoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 	
 $(NAME): $(SRC)
-	make all -C ./libft/ && mv ./libft/libft.a ./$(NAME)
-	cc $(FLAGS) -c $(SRC) $(HEADER)
-	ar rcs $(NAME) $(SRC:.c=.o)
+	make -C ./libft/ && mv ./libft/libft.a ./$(NAME)
+	cc $(FLAGS) -c $(SRC) -I $(HEADER)
+	ar rus $(NAME) $(SRC:.c=.o)
 
 clean:
 	make clean -C ./libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 12:03:17 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:02:28 by mtoof            ###   ########.fr       */
+/*   Created: 2022/10/25 17:09:31 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/14 20:12:06 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char		*dst_ptr;
-	char		*src_ptr;
+	size_t	i;
 
-	dst_ptr = (char *)dst;
-	src_ptr = (char *)src;
-	if (src_ptr == dst_ptr)
-		return (dst);
-	if (src_ptr < dst_ptr)
+	if (!dst && !src)
+		return (0);
+	i = 0;
+	if ((size_t)dst - (size_t)src < len)
 	{
-		src_ptr = src_ptr + len - 1;
-		dst_ptr = dst_ptr + len - 1;
-		while (len--)
-			*dst_ptr-- = *src_ptr--;
+		i = len - 1;
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i--;
+		}
 	}
 	else
 	{
-		while (len--)
-			*dst_ptr++ = *src_ptr++;
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
 	}
 	return (dst);
 }

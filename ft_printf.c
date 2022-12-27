@@ -6,7 +6,7 @@
 /*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:42:22 by mtoof             #+#    #+#             */
-/*   Updated: 2022/12/22 19:47:10 by atoof            ###   ########.fr       */
+/*   Updated: 2022/12/27 14:40:26 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_check_int(va_list args, int counter)
 		counter += ft_putchar('-');
 		i = -i;
 	}
-	counter += ft_convert(i, 10, 0);
+	counter += ft_convert_number(i, 10, 0);
 	return (counter);
 }
 

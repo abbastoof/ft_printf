@@ -3,37 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 00:00:11 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:03:50 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/08 13:27:18 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 17:34:21 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char	*big, const char	*little, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	h_index;
-	size_t	l_index;
-	char	*hey;
+	size_t	i;
+	size_t	j;
 
-	hey = (char *)big;
-	h_index = 0;
-	if (!len && *little)
-		return (0);
-	if (!little[0] || len == 0)
-		return (hey);
-	while (h_index < len && hey[h_index])
+	i = 0;
+	if (!*needle || !needle)
+		return ((char *)haystack);
+	if (len == 0 || !*haystack)
+		return (NULL);
+	while (haystack[i] != '\0' && i < len)
 	{
-		l_index = 0;
-		while (hey[h_index + l_index] && little[l_index]
-			&& h_index + l_index < len
-			&& hey[h_index + l_index] == little[l_index])
-			l_index++;
-		if (!little[l_index])
-			return (hey + h_index);
-		h_index++;
+		j = 0;
+		while (haystack[i + j] != '\0' && haystack[i + j] == needle[j]
+			&& (i + j) < len)
+		{
+			if (needle[j + 1] == '\0')
+				return ((char *)haystack + i);
+			++j;
+		}
+		++i;
 	}
-	return ((void *)0);
+	return (NULL);
 }

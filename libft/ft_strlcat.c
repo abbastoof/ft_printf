@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 17:28:07 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:03:28 by mtoof            ###   ########.fr       */
+/*   Created: 2022/10/31 14:36:14 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/17 13:11:29 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t		dst_len;
-	size_t		src_len;
-	size_t		dst_index;
+	size_t	dest_lng;
+	size_t	src_lng;
+	size_t	i;
 
-	src_len = ft_strlen(src);
-	if (dstsize == 0)
-		return (src_len);
-	dst_len = ft_strlen(dst);
-	dst_index = dst_len;
+	src_lng = ft_strlen(src);
+	dest_lng = 0;
+	if (dst)
+		dest_lng = ft_strlen(dst);
+	i = dest_lng;
 	if (!src || !*src)
-		return (dst_len);
-	else if (dstsize < dst_len)
-		return (dstsize + src_len);
-	while (*src && dstsize > dst_len && dst_index != dstsize - 1)
-		*(dst + dst_index++) = *src++;
-	*(dst + dst_index) = '\0';
-	return (dst_len + src_len);
+		return (dest_lng);
+	else if (dstsize <= dest_lng)
+		return (dstsize + src_lng);
+	while (*src && dstsize > dest_lng && i != dstsize - 1)
+		*(dst + i++) = *src++;
+	*(dst + i) = '\0';
+	return (dest_lng + src_lng);
 }

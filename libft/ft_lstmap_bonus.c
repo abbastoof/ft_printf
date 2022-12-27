@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:27:22 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:39 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/23 15:57:50 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/23 17:44:17 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*new_node;
+	t_list	*newlst;
+	t_list	*newelement;
 
-	if (!f || !del)
+	if (!del || !f)
 		return (NULL);
-	new_lst = NULL;
+	newlst = NULL;
 	while (lst)
 	{
-		new_node = ft_lstnew((*f)(lst->content));
-		if (!new_node)
+		newelement = ft_lstnew((*f)(lst->content));
+		if (!newelement)
 		{
-			ft_lstclear(&new_lst, del);
+			ft_lstclear(&newlst, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&new_lst, new_node);
+		ft_lstadd_back(&newlst, newelement);
 		lst = lst->next;
 	}
-	return (new_lst);
+	return (newlst);
 }

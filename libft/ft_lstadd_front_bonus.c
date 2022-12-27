@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 12:12:13 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:13 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/22 18:26:24 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 18:33:46 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst == NULL || new == NULL)
+	if (!lst || !new)
 		return ;
 	new ->next = *lst;
 	*lst = new;

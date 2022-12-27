@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 12:22:13 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:03:32 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/02 18:02:11 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 16:16:02 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	src_len;
+	size_t	i;
 
-	src_len = ft_strlen(src);
+	i = 0;
 	if (dstsize == 0)
-		return (src_len);
-	if (src_len < dstsize)
-		ft_memcpy(dst, src, src_len + 1);
-	else if (dstsize != 0)
+		return (ft_strlen(src));
+	while (i < dstsize - 1 && src[i])
 	{
-		ft_memcpy(dst, src, dstsize - 1);
-		dst[dstsize - 1] = '\0';
+		dst[i] = src[i];
+		i++;
 	}
-	return (src_len);
+	if (i < dstsize)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: atoof <atoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 15:40:29 by mtoof             #+#    #+#             */
-/*   Updated: 2022/11/16 16:16:36 by mtoof            ###   ########.fr       */
+/*   Created: 2022/11/04 18:04:26 by atoof             #+#    #+#             */
+/*   Updated: 2022/11/22 16:26:57 by atoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		s_len;
-	char	*str;
+	int		i;
 
-	str = (char *)s;
-	s_len = ft_strlen(s);
-	while (s_len + 1 > 0)
+	i = ft_strlen(s);
+	while (i + 1 > 0)
 	{
-		if (s[s_len] == (char)c)
-			return (str + s_len);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
 		if (!*s)
 			return (NULL);
-		s_len--;
+		i--;
 	}
-	return ((void *)0);
+	return (NULL);
 }
